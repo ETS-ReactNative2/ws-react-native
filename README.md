@@ -30,7 +30,7 @@ or press `w` for launch the app in your webbrowser.
 - [**Test de l'app**](./guidelines/3.Start.md)  
 - [**ReactNative todo #1**](./guidelines/4.Work1.md)  
 - [**ReactNative todo #2**](./guidelines/5.Work2.md)
-- [**Extras**](./guidelines/6.Extras.md)
+- [**Final**](./guidelines/6.Final.md)
 
 # Figma : 
 [![ruMUt5.md.png](https://i1.lensdump.com/i/ruMUt5.md.png)](https://lensdump.com/i/ruMUt5)
