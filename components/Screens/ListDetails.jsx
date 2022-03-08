@@ -116,27 +116,68 @@ const ListDetails = (ref) => {
 
     // WORKSHOP TODO : CODE HERE
     return (
-        <View >
-
-                <Text >Produits :</Text>
+        <View style={styles.container}>
+            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                <Text style={styles.heading}>Produits :</Text>
                 {/* Listing of products */}
-                
+                <FlatList
+                    data={items}
+                    renderItem={renderItem}
+                    keyExtractor={items => items.id}
+                />
                 {/* Use the component AddNew for add a new product*/}
-
+            <AddNew addNew={addItem} onChangeText={(text) => { setItem(text) }} />
+            </ImageBackground>
         </View>
     )
 }
 
-// WORKSHOP TODO : COMPLETE THE STYLE
 const styles = StyleSheet.create({
-    
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        height: '100%',
+        width: '100%'
+    },
+    image: {
+        flex: 1,
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    heading: {
+        alignSelf: 'flex-start',
+        color: Colors.darkGrey,
+        fontSize: 24,
+        marginTop: 100,
+        marginBottom: 70,
+        marginLeft: 20,
+    },
     listContainer: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+        width: 350,
+        height: 50,
+        margin: 5,
+        fontSize: 20,
+        backgroundColor: Colors.darkGreen,
+        borderRadius: 10,
     },
     list: {
         flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        backgroundColor: Colors.darkGreen,
+        borderRadius: 10,
+        height: 45,
+        width: 350,
     },
     textChecked: {
+        color: Colors.white,
         textDecorationLine: 'line-through',
     },
     textUnchecked: {
@@ -154,6 +195,4 @@ const styles = StyleSheet.create({
     }
 });
 
-
-// EXPORT
 export default ListDetails;

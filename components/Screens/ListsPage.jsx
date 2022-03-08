@@ -6,11 +6,13 @@ import { db } from '../../core/config';
 import { collection, doc, setDoc, getDocs, deleteDoc } from 'firebase/firestore';
 import AddNew from './AddNew';
 
+// For listing
 const ListsPage = () => {
     const navigation = useNavigation();
     const [collectionList, setCollectionList] = useState([]);
     const [newRef, setNewRef] = useState('');
 
+    // WORKSHOP : CODE BACKEND : DO NOT EDIT
     const createDoc = async () => {
         const ref = doc(db, 'ShoppingList', newRef)
         await setDoc(ref, {});
@@ -40,8 +42,8 @@ const ListsPage = () => {
         readDoc();
     }, [])
 
+    // WORKSHOP : LISTS PROCESSING : DO NOT EDIT
     const RenderItem = ({ item }) => (
-
         <View key={item.id} style={styles.listContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("Détails de votre liste", { ref: item.id })}>
                 <Text style={styles.list}>{item.id}</Text>
@@ -52,21 +54,53 @@ const ListsPage = () => {
         </View>
     );
 
+    // WORKSHOP TODO : CODE HERE
     return (
-        <View>
-            {/*WORKSHOP TODO : CODE HERE*/}               
+        <View style={styles.container}>
+            <Text style={styles.heading}>Vos listes :</Text>
+            {/*Listing of lists */}
+            <FlatList
+                data={collectionList}
+                renderItem={RenderItem}
+                keyExtractor={collectionList => collectionList.id}
+            />
+            {/* Use the component AddNew for add a new item into the shopping list*/}
+            <AddNew addNew={createDoc} onChangeText={(text) => { setNewRef(text) }} />
         </View >
     );
 }
 
-// WORKSHOP TODO : COMPLETE THE STYLE
 const styles = StyleSheet.create({
-    
-    listContainer: {
+    container: {
+        flex: 1,
         alignItems: 'center',
+        height: '100%',
+        width: '100%'
+    },
+    heading: {
+        alignSelf: 'flex-start',
+        color: Colors.darkGrey,
+        fontSize: 24,
+        marginTop: 100,
+        marginBottom: 70,
+        marginLeft: 20,
+    },
+    listContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: 350,
+        height: 35,
+        margin: 5,
+        fontSize: 20,
+        backgroundColor: Colors.darkGreen,
+        borderRadius: 10,
     },
     list: {
         fontSize: 20,
+        color: Colors.white,
+        marginLeft: 10
     },
     deleteIcon: {
         tintColor: Colors.red,
@@ -76,6 +110,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
-// EXPORT
 export default ListsPage;
